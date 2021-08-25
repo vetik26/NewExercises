@@ -2,34 +2,45 @@
 
 
 
-$choose = array('rock', 'paper', 'scissors');
-$pcRandom = array_rand($choose);
-$pc = $choose[$pcRandom];
-//$r = 'rock' || 'r';
-//$p = 'paper' || 'p';
-//$s = 'scissors' || 's';
+$choose = [1 => 'rock', 2 => 'paper', 3 => 'scissors'];
 
-$user = strtolower(readline("Enter a word: rock/r, paper/p, scissors/s: ")) . PHP_EOL;
+$pc =  $choose[ round(rand(1,3))];
 
+$user = strtolower((string)readline('Enter your choose: '));
+
+
+
+echo "You choosed: $user, PC choosed: $pc" . PHP_EOL;
 
 if ($user === 'rock' && $pc === 'paper'){
-    echo 'PC wins with paper';
+    echo 'PC wins with paper'. PHP_EOL;
+    exit;
 }else if ($user === 'paper' && $pc === 'rock'){
-    echo 'User wins with paper';
+    echo 'User wins with paper'. PHP_EOL;
+    exit;
 }else if ($user === 'scissors' && $pc === 'paper'){
-    echo 'User wins with scissors';
+    echo 'User wins with scissors'. PHP_EOL;
+    exit;
 }else if ($user === 'paper' && $pc === 'scissors'){
-    echo 'PC wins with scissors';
+    echo 'PC wins with scissors'. PHP_EOL;
+    exit;
 }else if($user === 'rock' && $pc === 'scissors'){
-    echo 'User wins with rock';
+    echo 'User wins with rock'. PHP_EOL;
+    exit;
 }else if ($user === 'scissors' && $pc === 'rock'){
-    echo 'PC wins with rock';
+    echo 'PC wins with rock'. PHP_EOL;
+    exit;
 }else if ($user === 'rock' && $pc === 'rock'){
-    echo 'Its a tie';
+    echo 'Its a tie'. PHP_EOL;
+    exit;
 }else if ($user === 'paper' && $pc === 'paper'){
-    echo 'Its a tie';
+    echo 'Its a tie'. PHP_EOL;
+    exit;
 }else if ($user === 'scissors' && $pc === 'scissors'){
-    echo 'Its a tie';
+    echo 'Its a tie'. PHP_EOL;
+    exit;
+}else{
+    echo 'something wrong' . PHP_EOL;
 }
 
 

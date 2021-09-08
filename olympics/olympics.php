@@ -8,12 +8,12 @@ public function __construct(string $symbol)
 $this->symbol = $symbol;
 }
 
-public function getSportist()
+private function getSportist()
     {
         return $this->symbol;
     }
 
-public function move()
+private function move()
     {
         $this->location+=rand(1,2);
     }
@@ -51,7 +51,7 @@ $this->time++;
 
 }
 
-public function setLines()
+private function setLines()
 {
     foreach ($this->sportists as $key => $sportist)
         {
@@ -61,7 +61,7 @@ public function setLines()
 }
 
 
-public function printLines()
+private function printLines()
 {
     foreach ($this->lanes as $lane)
     {
@@ -70,7 +70,7 @@ public function printLines()
 }
 
 
-public function sportistsMove()
+private function sportistsMove()
 {
     foreach ($this->sportists as $sportist)
     {
@@ -88,7 +88,7 @@ public function sportistsMove()
 }
 
 
-public function isFinished(): bool
+private function isFinished(): bool
 {
     foreach($this->sportists as $key => $sportist)
     {
@@ -100,7 +100,7 @@ public function isFinished(): bool
     return true;
 }
 
-public function listPlaces()
+private function listPlaces()
 {
     $n = 1;
     foreach ($this->places as $key => $place)
@@ -120,15 +120,15 @@ public function listPlaces()
 
 
 $sportists = [
-new Sportist('1'),
-new Sportist('2'),
-new Sportist('3'),
-new Sportist('4'),
-new Sportist('5'),
-new Sportist('6'),
-new Sportist('7'),
-new Sportist('8'),
-new Sportist('9'),
+new Sportist('!'),
+new Sportist('@'),
+new Sportist('#'),
+new Sportist('$'),
+new Sportist('%'),
+new Sportist('/'),
+new Sportist('&'),
+new Sportist('?'),
+new Sportist('0'),
 
 ];
 

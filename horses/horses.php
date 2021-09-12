@@ -1,22 +1,22 @@
 <?php
 
 
-class Sportist
+class Horse
 {
-    public $symbol;
+    public $number;
     public $location = 0;
 
-    public function __construct(string $symbol)
+    public function __construct(string $number)
     {
-        $this->symbol = $symbol;
+        $this->number = $number;
     }
 
-    public function getSportist()
+    private function getHorse()
     {
-        return $this->symbol;
+        return $this->number;
     }
 
-    public function move()
+    private function move()
     {
         $this->location += rand(1, 2);
     }
@@ -29,15 +29,15 @@ class Game
 {
 
     public $lanes;
-    public $sportists;
+    public $horses;
     public $places = [];
     public $laneLength = 10;
     public $time = 0;
 
-    public function __construct($sportists, int $laneLength)
+    public function __construct($horses, int $laneLength)
     {
         $this->laneLength = $laneLength;
-        $this->sportists = $sportists;
+        $this->horses = $horses;
     }
 
     public function GameStart()
@@ -49,21 +49,21 @@ class Game
 
         $this->setLines();
         $this->printLines();
-        $this->sportistsMove();
+        $this->horsesMove();
         $this->time++;
 
     }
 
-    public function setLines()
+    private function setLines()
     {
-        foreach ($this->sportists as $key => $sportist) {
-            $this->lanes[$key] = str_repeat('_', $this->laneLength - ($this->laneLength - $sportist->location))
-                . $sportist->symbol . str_repeat('_', $this->laneLength - $sportist->location);
+        foreach ($this->horses as $key => $horse) {
+            $this->lanes[$key] = str_repeat('_', $this->laneLength - ($this->laneLength - $horse->location))
+                . $horse->number . str_repeat('_', $this->laneLength - $horse->location);
         }
     }
 
 
-    public function printLines()
+    private function printLines()
     {
         foreach ($this->lanes as $lane) {
             echo $lane . PHP_EOL;
@@ -71,60 +71,69 @@ class Game
     }
 
 
-    public function sportistsMove()
+    private function horsesMove()
     {
-        foreach ($this->sportists as $sportist) {
-            if (!in_array($sportist, $this->places)) {
-                $sportist->move();
-                if ($sportist->location >= $this->laneLength) {
-                    $sportist->location = $this->laneLength;
-                    array_push($this->places, $sportist);
-                    $sportist->timeFinished = $this->time;
+        foreach ($this->horses as $horse)
+        {
+            if (!in_array($horse, $this->places))
+            {
+
+                $horse->move();
+                if ($horse->location >= $this->laneLength)
+                {
+                    $horse->location = $this->laneLength;
+                    array_push($this->places, $horse);
+                    $horse->timeFinished = $this->time;
                 }
             }
         }
     }
 
 
-    public function isFinished(): bool
+    private function isFinished(): bool
     {
-        foreach ($this->sportists as $key => $sportist) {
-            if (!in_array($sportist, $this->places)) {
+        foreach ($this->horses as $key => $horse)
+        {
+            if (!in_array($horse, $this->places))
+            {
                 return false;
             }
         }
         return true;
     }
 
-    public function listPlaces()
+    private function listPlaces()
     {
         $n = 1;
-        foreach ($this->places as $key => $place) {
-            if ($place->timeFinished < @$this->places[$key + 1]->timeFinished) {
-                echo $n . " place: Sportsman NO." . $place->symbol . " ($place->timeFinished sec.)" . PHP_EOL;
+        foreach ($this->places as $key => $place)
+        {
+            if ($place->timeFinished < @$this->places[$key + 1]->timeFinished)
+            {
+                echo $n . " place: Horse NO." . $place->number . " ($place->timeFinished sec.)" . PHP_EOL;
                 $n++;
-            } else {
-                echo $n . " place: Sportsman NO." . $place->symbol . " ($place->timeFinished sec.)" . PHP_EOL;
+            } else
+            {
+                echo $n . " place: Horse NO." . $place->number . " ($place->timeFinished sec.)" . PHP_EOL;
             }
         }
     }
 }
 
 
-$sportists = [
-    new Sportist('1'),
-    new Sportist('2'),
-    new Sportist('3'),
-    new Sportist('4'),
-    new Sportist('5'),
-    new Sportist('6'),
-    new Sportist('7'),
-    new Sportist('8'),
-    new Sportist('9'),
+$horses = [
+    new Horse('1'),
+    new Horse('2'),
+    new Horse('3'),
+    new Horse('4'),
+    new Horse('5'),
+    new Horse('6'),
+    new Horse('7'),
+    new Horse('8'),
+    new Horse('9'),
 
 ];
 
-$game = new Game($sportists, 20);
+$game = new Game($horses, 20);
 while (true) {
     system('clear');
     $game->GameStart();
